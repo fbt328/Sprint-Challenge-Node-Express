@@ -2,12 +2,6 @@ const express = require('express');
 const router = express.Router();
 const ActionDB = require('./helpers/actionModel.js')
 
-// router.get
-// router.get (by id)
-// router.post insert()
-// router.delete remove()
-// router.put update()
-
 // get endpoint
 router.get('/', async (req, res) => {
     try {
@@ -16,7 +10,7 @@ router.get('/', async (req, res) => {
         console.log('get success')
     } catch (error) {
         console.log(error);
-        res.status(500).json({error: 'get failure'})
+        res.status(500).json({error: 'There was a problem getting your list of actions'})
     }
 })
 
@@ -29,7 +23,7 @@ router.get('/:id', async (req, res) => {
         console.log('get by id success')
     } catch (error) {
         console.log(error);
-        res.status(500).json({error: 'get failure'})
+        res.status(500).json({error: 'There was a problem getting your action. Are you sure your ID is correct?'})
     }
 })
 
@@ -46,7 +40,7 @@ router.post('/', async (req, res) => {
         }
     } catch (error) {
         console.log(error);
-        res.status(500).json({error: 'post failure'})
+        res.status(500).json({error: 'There was an error when adding your action'})
     }
 })
 
@@ -59,7 +53,7 @@ router.delete('/:id', async (req, res) => {
         console.log('delete success')
     } catch (error) {
         console.log(error);
-        res.status(500).json({error: 'delete failure'})
+        res.status(500).json({error: 'There was an error deleting your action'})
     }
 
 })
@@ -77,9 +71,7 @@ router.put('/:id', async (req, res) => {
     } catch (error) {
       // log error to database
       console.log(error);
-      res.status(500).json({
-        message: 'Error updating the action',
-      });
+      res.status(500).json({message: 'Error updating the action',});
     }
   });
 

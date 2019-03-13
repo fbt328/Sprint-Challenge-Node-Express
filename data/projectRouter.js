@@ -2,12 +2,6 @@ const express = require('express');
 const router = express.Router();
 const ProjectDB = require('./helpers/projectModel.js')
 
-// router.get
-// router.get (by id)
-// router.post insert()
-// router.delete remove()
-// router.put update()
-
 // get endpoint
 router.get('/', async (req, res) => {
     try {
@@ -16,7 +10,7 @@ router.get('/', async (req, res) => {
         console.log('get project success')
     } catch (error) {
         console.log(error);
-        res.status(500).json({error: 'get project failure'})
+        res.status(500).json({error: 'There was an error getting your projects'})
     }
 })
 
@@ -28,7 +22,7 @@ router.get('/:id', async (req, res) => {
         console.log('get by id success')
     } catch (error) {
         console.log(error);
-        res.status(500).json({error: 'get failure'})
+        res.status(500).json({error: 'There was an error getting your project, are you sure the ID is correct?'})
     }
 })
 
@@ -41,7 +35,7 @@ router.get('/:id/actions', async (req, res) => {
         console.log('get project by id success')
     } catch (error) {
         console.log(error);
-        res.status(500).json({error: 'get project failure'})
+        res.status(500).json({error: 'There was an error getting your actions. Are you sure your project ID is correct?'})
     }
 })
 
@@ -55,7 +49,7 @@ router.post('/', async (req, res) => {
         
     } catch (error) {
         console.log(error);
-        res.status(500).json({error: 'post failure'})
+        res.status(500).json({error: 'There was an error adding your project'})
     }
 })
 
@@ -68,7 +62,7 @@ router.delete('/:id', async (req, res) => {
         console.log('delete success')
     } catch (error) {
         console.log(error);
-        res.status(500).json({error: 'delete failure'})
+        res.status(500).json({error: 'There was an error deleting your project'})
     }
 
 })
@@ -86,9 +80,7 @@ router.put('/:id', async (req, res) => {
     } catch (error) {
       // log error to database
       console.log(error);
-      res.status(500).json({
-        message: 'Error updating the action',
-      });
+      res.status(500).json({message: 'There was an error updating the project'});
     }
   });
 
