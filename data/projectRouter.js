@@ -41,17 +41,22 @@ router.get('/:id/actions', async (req, res) => {
 
 // post
 router.post('/', async (req, res) => {
-    const project = req.body
+    const {name, description} = req.body
     try {
-            const newProject = await ProjectDB.insert(project);
+        if (name && description){
+            const newProject = await ProjectDB.insert({name, description});
             res.status(200).json(newProject);
             console.log('post success')
+        } else {
+            res.status(400).json({error: "Please provide both a name and description."}); 
+        }
         
     } catch (error) {
         console.log(error);
         res.status(500).json({error: 'There was an error adding your project'})
     }
 })
+
 
 // delete remove()
 router.delete('/:id', async (req, res) => {

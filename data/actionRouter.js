@@ -28,13 +28,33 @@ router.get('/:id', async (req, res) => {
 })
 
 // post
+// router.post('/', async (req, res) => {
+//     const { project_id, description, notes } = req.body
+//     try {
+//         if (project_id && description && notes) {
+//             const newAction = await ActionDB.insert({project_id, description, notes});
+//             res.status(200).json(newAction);
+//             console.log('post success')
+//         } else if (description.length > 128) {
+//             res.status(401).json({error: 'description must be less than 128 characters' })
+//         } else {
+//             res.status(400).json({error: "Please provide all required fields."});
+//         }
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({error: 'There was an error when adding your action'})
+//     }
+// })
+
 router.post('/', async (req, res) => {
     const { project_id, description, notes } = req.body
     try {
-        if (project_id && description && notes) {
+        if (project_id && description && notes && description.length < 128) {
             const newAction = await ActionDB.insert({project_id, description, notes});
             res.status(200).json(newAction);
             console.log('post success')
+        } else if (description.length > 128) {
+            res.status(401).json({error: 'description must be less than 128 characters' })
         } else {
             res.status(400).json({error: "Please provide all required fields."});
         }
